@@ -1,0 +1,139 @@
+Client 1 just connected!
+Client 1: /w timmy
+Client 1 just connected!
+Client 1: hello
+Client 1: /w hello
+Client 1 just connected!
+Client 1: /w timmy t
+Client 1 just connected!
+Client 1: /w timmy hello
+Client1 just connected!
+Client2 just connected!
+Client 2: /w Client1 Hello my friend
+Client 2: hi
+Client1 just connected!
+Client2 just connected!
+Client 2: hello
+Client 2: /w this
+Client 2: /w this is so funny
+Client1 just connected!
+Client2 just connected!
+Client3 just connected!
+Client 3: /w Client2 hello
+Client1 just connected!
+Client2 just connected!
+Client3 just connected!
+Client 3: /w Client2 hello
+Client1 just connected!
+Client2 just connected!
+Client3 just connected!
+Client 3: /w Client1 hello
+Client1 just connected!
+Client2 just connected!
+Client3 just connected!
+Client 3: /w Client1 hello
+Client 3: /w noone hello
+Client1 just connected!
+Client2 just connected!
+Client3 just connected!
+Client 3: /w Client1 hello
+Client 1 just disconnected.
+Client 2 just disconnected.
+Client 3 just disconnected.
+Client1 just connected!
+Client2 just connected!
+Client3 just connected!
+Client 3: /whisper Client1 hello there
+Client1 just connected!
+Client2 just connected!
+Client3 just connected!
+Client 3: /w Client1 hello
+Client 3: /username Billy
+Client1 just connected!
+Client 1: /close me
+Client1 just connected!
+Client 1: close me
+Client 1 just disconnected.
+Client1 just connected!
+Client 1: /close me
+Client 1 just disconnected.
+1:Client1 just connected!
+1:Client1: /close
+1:Client1 just disconnected.
+1:Client1 just connected!
+1:Client1: hello
+2:Client2 just connected!
+2:Client2: hello2
+2:Client2: /close
+2:Client2 just disconnected.
+1:Client1 just connected!
+2:Client2 just connected!
+2:Client2: /close
+2:Client2 just disconnected.
+1:Client1: /close
+1:Client1 just disconnected.
+3:Client3 just connected!
+1:Client1 just connected!
+2:Client2 just connected!
+2:Client2: /username Billy
+2:Billy: howdy
+1:Client1: /kick Billy
+1:Client1: /kick Billy asd
+1:Client1 just disconnected.
+1:Client1 just connected!
+2:Client2 just connected!
+2:Client2: /username billy
+2:billy: hi
+1:Client1: /kick billy asd
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+1:Client1: /username billy
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+3:Client3: /username billy
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+3:Client3: /username billy
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+1:Client1: /username billy
+1:Client1 just connected!
+2:Client2 just connected!
+2:Client2: /kick Client1
+1:Client1 just connected!
+2:Client2 just connected!
+1:Client1 just connected!
+2:Client2 just connected!
+1:Client1 just connected!
+2:Client2 just connected!
+2:Client2: /kick Client1 supersecretpw
+1:Client1 just connected!
+2:Client2 just connected!
+2:Client2: /kick Client1 supersecretpw
+1:Client1 just disconnected.
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+3:Client3: /username bob
+2:Client2: /username billy
+1:Client1: /clientlist
+1:Client1: 
+1:Client1 just disconnected.
+2:billy just disconnected.
+3:bob just disconnected.
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+3:Client3: /clientlist
+1:Client1 just connected!
+2:Client2 just connected!
+2:Client2: /clientlist
+1:Client1 just connected!
+2:Client2 just connected!
+1:Client1: /clientlist
+2:Client2: /username billy
+1:Client1: /clientlist
