@@ -26,6 +26,72 @@ server.on('connection', connection => {
         }
     });
 
+    connection.on('whisper', (whisperedUser, message) => {
+        let clientExists = false;
+
+        if ( whisperedUser === connection.name ) {
+            connection.write(`Server: Error, you whispered yourself.`);
+            return;
+        }
+        clientList.forEach((client) => {
+            if ( client.name === whisperedUser ) {
+                clientExists = true;
+                client.write(`${connection.name} whispers: ${message}`)
+            }
+        });
+        if ( clientExists === false ) {
+            connection.write(`Server: Error, there is no one named ${whisperedUser}.`)
+        }
+
+    });
+
+    connection.on('changeUsername', (newUsername, inputs) => {
+        let usernameExists = false;
+
+        if ( inputs.length > 2 ) {
+            connection.write(`Server: Error, usernames cannot contain spaces.`);
+            return
+        }
+        if ( newUsername === connection.name ) {
+            connection.write(`Server: Error, that is the same username.`);
+            return
+        }
+        clientList.forEach((client) => {
+            if ( client.name === newUsername ) {
+                connection.write(`Server: Error ${newUsername} is already in use.`);
+                usernameExists = true;
+            }
+        });
+        if ( usernameExists === true ) return;
+        connection.name = newUsername;
+        connection.write(`Server: Success, your new username is ${newUsername}`);
+    });
+
+    connection.on('kickUser', (clientToKick, password) => {
+        if ( password !== serverAdminPassword ) {
+            connection.write(`Server: Error, admin password incorrect.`);
+            return;
+        }
+        clientList.forEach((client) => {
+            if ( client.name === clientToKick ) {
+                client.write(`Server: An Admin has removed you from this channel.`);
+                connection.write(`Server: ${client.name} has been removed from this channel.`);
+                client.end();
+            }
+        });
+    });
+
+    connection.on('getClientList', () => {
+        let activeClients = [];
+        clientList.forEach((client) => {
+            activeClients.push(client.name);
+        });
+        connection.write(`Server: Active Clients are...${activeClients.join(' ,')}.`);
+
+
+    });
+
+
     connection.on('data', (data) => {
         if ( data ) {
             fs.appendFile('chat.log', `${connection.id}:${connection.name}: ${data}`, (error) => {
@@ -35,87 +101,36 @@ server.on('connection', connection => {
 
         if ( data.toString().trim().charAt(0) === '/' ) {
             let command = data.toString().trim().split(' ');
-
+            let action = command[0];
+            let qualifier = command[1];
+            let password = command[2];
             let message = command.slice(2).join(' ');
-            let clientExists = false;
-            let activeClients = [];
-            switch ( command[0] ) {
+
+            switch ( action ) {
                 case '/close':
                     connection.end();
                     break;
                 case '/w':
                 case '/whisper':
                 case '/Whisper':
-                    let whisperedUser = command[1];
-                    if ( whisperedUser === connection.name ) {
-                        connection.write(`Server: Error, you whispered yourself.`);
-                        break;
-                    }
-                    clientExists = false;
-                    clientList.forEach((client) => {
-                        if ( client.name === whisperedUser ) {
-                            clientExists = true;
-                            client.write(`${connection.name} whispers: ${message}`)
-                        }
-                        if ( clientExists === false ) {
-                            connection.write(`Server: Error, there is no one named ${command[1]}.`)
-                        }
-                    });
+                    connection.emit('whisper', qualifier, message);
                     break;
                 case '/username':
-                    let newUsername = command[1];
-                    if ( command.length > 3 ) {
-                        connection.write(`Server: Error, usernames cannot contain spaces.`);
-                        break;
-                    }
-                    if ( newUsername === connection.name ) {
-                        connection.write(`Server: Error, that is the same username.`);
-                        break;
-                    }
-                    clientExists = false;
-                    clientList.forEach((client) => {
-                        if ( client.name === newUsername ) {
-                            connection.write(`Server: Error ${newUsername} is already in use.`);
-                            clientExists = true;
-                        }
-                    });
-                    if ( clientExists === true ) break;
-                    connection.name = newUsername;
-                    connection.write(`Server: Success, your new username is ${newUsername}`);
+                case '/Username':
+                    connection.emit('changeUsername', qualifier, command.length);
                     break;
                 case '/kick':
-                    let clientToKick = command[1];
-                    let password = command[2];
-                    if ( command.length > 3 ) {
-                        connection.write(`Server: Error, password cannot contain spaces.`);
-                        break;
-                    }
-                    if ( password !== serverAdminPassword ) {
-                        connection.write(`Server: Error, admin password incorrect.`);
-                        break;
-                    }
-                    clientList.forEach((client) => {
-                        if ( client.name === clientToKick ) {
-                            client.write(`Server: An Admin has removed you from this channel.`);
-                            connection.write(`Server: ${client.name} has been removed from this channel.`);
-                            client.end();
-                        }
-                    });
+                case '/Kick':
+                    connection.emit('kickUser', qualifier, message);
                     break;
                 case '/clientlist':
-                    clientList.forEach((client) => {
-                        console.log(client.name);
-                        activeClients.push(client.name);
-                    });
-                    connection.write(`Server: Active Clients are...${activeClients.join()}.`);
+                    connection.emit('getClientList', qualifier, message);
                     break;
-
                 default:
                     connection.write(`Server: Invalid command`);
                     break;
             }
         } else {
-
             clientList.forEach((client) => {
                 if ( client !== connection ) {
                     client.write(`${connection.name}: ${data}`)

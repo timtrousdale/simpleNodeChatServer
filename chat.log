@@ -137,3 +137,34 @@ Client 1 just disconnected.
 1:Client1: /clientlist
 2:Client2: /username billy
 1:Client1: /clientlist
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+3:Client3: hello
+3:Client3: /username billy
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+3:Client3: /w Client1 hello there
+1:Client1 just disconnected.
+1:Client1 just connected!
+1:Client1: /username billy
+1:billy: /username billy
+1:billy: /username billy is cool
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+1:Client1: /username billy
+1:Client1 just connected!
+2:Client2 just connected!
+3:Client3 just connected!
+1:Client1: /w billy hello
+1:Client1: /w heloo
+1:Client1: /w Client2
+1:Client1: /w Client1 de
+1:Client1: /kick Client2
+1:Client1: /kick Client2 supersecretpw
+2:Client2 just disconnected.
+1:Client1: /kick Client3 sdf
+3:Client3: /username billy
+1:Client1: /clientlist
